@@ -1,5 +1,7 @@
 const videoContainer = document.getElementById('videoContainer');
+const timeSpentDisplay = document.getElementById('timeSpent'); // Reference to display time element
 
+// Rest of your code...
 // Simulated dataset of video links
 const videoLinks = [
     { title: 'Video 1', source: 'https://xhamster.com/videos/beautiful-girl-fucked-and-creampied-12726059' },
@@ -54,5 +56,13 @@ function populateVideoContainer(videos) {
     });
 }
 
-// Load video links from the dataset and populate the video container
+// Initially populate the video container with videos
 populateVideoContainer(videoLinks);
+
+// Track time spent on the page
+let timeSpent = 0;
+
+setInterval(function() {
+    timeSpent += 1;
+    timeSpentDisplay.textContent = `Time spent on the page: ${timeSpent} seconds`; // Update display element
+}, 1000);
