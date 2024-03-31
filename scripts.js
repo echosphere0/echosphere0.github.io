@@ -19,7 +19,7 @@ const videoLinks = [
     // Add more video links as needed
 ];
 
-/// Function to create a video card element
+// Function to create a video card element
 function createVideoCard(video) {
     const card = document.createElement('div');
     card.classList.add('video-card');
@@ -56,8 +56,25 @@ function populateVideoContainer(videos) {
     });
 }
 
-// Initially populate the video container with videos
-populateVideoContainer(videoLinks);
+// Function to apply blur effect to content
+function applyBlurEffect() {
+    const allContent = document.body.children;
+    for (let i = 0; i < allContent.length; i++) {
+        allContent[i].style.filter = 'blur(2px)';
+    }
+}
+
+// Ask user if they are an adult
+const isAdult = confirm("Are you an adult? Click OK if yes, or Cancel if no.");
+
+// Depending on user's response, either show content without blur or apply blur effect
+if (isAdult) {
+    // Adult - show content without blur
+    populateVideoContainer(videoLinks);
+} else {
+    // Not an adult - apply blur effect
+    applyBlurEffect();
+}
 
 // Track time spent on the page
 let timeSpent = 0;
@@ -66,3 +83,14 @@ setInterval(function() {
     timeSpent += 1;
     timeSpentDisplay.textContent = `Time spent on the page: ${timeSpent} seconds`; // Update display element
 }, 1000);
+
+// Auto-rotation based on device orientation
+window.addEventListener('deviceorientation', handleDeviceOrientation);
+
+function handleDeviceOrientation(event) {
+    const rotationRate = event.rotationRate;
+    if (rotationRate.alpha || rotationRate.beta || rotationRate.gamma) {
+        // Perform rotation logic here
+        console.log('Device rotation:', rotationRate);
+    }
+}
